@@ -39,3 +39,5 @@ python easyovpn.py --address your_server_address --gen-clients num_of_new_client
 <code>
 python easyovpn.py --init --address your_server_address --gen-clients num_of_new_clients
 </code>
+
+<p>The script was written based on <a href="https://simplificandoredes.com/en/install-open-vpn-on-linux/">this arcticle<a>. Thanks the author.</p>
