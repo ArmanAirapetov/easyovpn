@@ -20,7 +20,7 @@ After previous steps it can make an individual .ovpn file for each client. Comma
     <code>pip install -r requirements.txt</code>
   </li>
 </ol>
-<h3>First using</h3>
+<h3>First using. Generating a server.</h3>
 <ol>
   <li>
     <code>
@@ -31,7 +31,7 @@ After previous steps it can make an individual .ovpn file for each client. Comma
     <p>Go through interaction with the programm. It is easy I hope.
   </li>
 </ol>
-<h3>Next using</h3>
+<h3>Next using. Generating a client.</h3>
 <code>
 python easyovpn.py --address your_server_address --gen-clients num_of_new_clients
 </code>
@@ -39,5 +39,22 @@ python easyovpn.py --address your_server_address --gen-clients num_of_new_client
 <code>
 python easyovpn.py --init --address your_server_address --gen-clients num_of_new_clients
 </code>
+<h3>Firewall configuring.</h3>
+<span>Run </span>
+<code>python easyovpn.py --conf-fwall</code>
+<p><b>Warning</b>. Need root privilege.</p>
+<h3>Start server.</h3>
+<ol>
+  <li>
+      <code>sudo cp confs/server.conf /etc/openvpn/server</code>
+  </li>
+  <li>
+    <code>sudo systemctl start openvpn-server@server.service</code>
+  </li>
+  <li>
+    <div>Check status of a process.</div>
+    <code>sudo systemctl status openvpn-server@server.service</code>
+  </li>
+</ol>
 <h3>Referance</h3>
-<p>The script was written based on <a href="https://simplificandoredes.com/en/install-open-vpn-on-linux/">this arcticle<a>. Thanks the author.</p>
+<p>The programm was written based on <a href="https://simplificandoredes.com/en/install-open-vpn-on-linux/">this arcticle<a>. Thanks the author.</p>
