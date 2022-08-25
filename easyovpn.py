@@ -522,7 +522,6 @@ def parse_args():
                         dest='num_clients',
                         action='store',
                         nargs='?', 
-                        required=True,
                         type=int, 
                         help=help_gc) 
 
@@ -561,12 +560,6 @@ def parse_args():
     if parsed.conf_fwall is True:
         conf_firewall()
 
-    if parsed.num_clients is None:
-        err_msg = ('Number of new clients has not been passed with '
-                   '"--gen-clients/-gc" argument.')
-        print(err_msg)
-        sys.exit(1)
-
     if parsed.init is True:
         if result.is_main_step_completed() is False:
             main()
@@ -574,19 +567,25 @@ def parse_args():
             print(f'{bcolors.WARNING}CA exists.{bcolors.ENDC}')
 
     if result.is_main_step_completed():
-        if parsed.num_clients > 0:
-            if CA_PASSWORD is None:
-                msg = ('CA authorization is required. Pls, input password.')
-                CA_PASSWORD = getpass(msg)
-            print('Creating profiles of openvpn clients.')
-            for i in range(0, parsed.num_clients):
-                client_name = input('Write \'clientname\'.\n')
-                msg = ('A new client\'s password:') 
-                client_password = repeat_until_correct_password(msg)
-                get_client(client_name, client_password)
-        else:
-            print('Number of clients must be a positive integer.')
+        if parsed.num_clients is None:
+            err_msg = ('Number of new clients has not been passed with '
+                       '"--gen-clients/-gc" argument.')
+            print(err_msg)
             sys.exit(1)
+        else:
+            if parsed.num_clients > 0:
+                if CA_PASSWORD is None:
+                    msg = ('CA authorization is required. Pls, input password.')
+                    CA_PASSWORD = getpass(msg)
+                print('Creating profiles of openvpn clients.')
+                for i in range(0, parsed.num_clients):
+                    client_name = input('Write \'clientname\'.\n')
+                    msg = ('A new client\'s password:') 
+                    client_password = repeat_until_correct_password(msg)
+                    get_client(client_name, client_password)
+            else:
+                print('Number of clients must be a positive integer.')
+                sys.exit(1)
     else:
         error = ('The certificate authority has not been created. '
                  'Use a "-i/--init" command.')

@@ -42,7 +42,7 @@ python easyovpn.py --init --address your_server_address --gen-clients num_of_new
 <h3>Firewall configuring.</h3>
 <span>Run </span>
 <code>python easyovpn.py --conf-fwall</code>
-<p><b>Warning</b>. Need root privilege.</p>
+<p><b>Warning</b>. Need sudo password.</p>
 <h3>Start server.</h3>
 <ol>
   <li>
